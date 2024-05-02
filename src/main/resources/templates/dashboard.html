@@ -1,0 +1,24 @@
+<!--This is index/home page-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}">
+<body>
+<div layout:fragment="content">
+<!--    This block is for authenticated users/providers-->
+    <div class="row" sec:authorize="isFullyAuthenticated()">
+<!--        for showing success messages form parameter-->
+        <div th:if="${param.success}">
+            <div class="alert alert-info" th:text="${param.success}"></div>
+        </div>
+<!--        Welcome message-->
+        <h1 class="text-center h1 py-2" th:text="'Welcome ' + ${user.getFullName()} + ' to Departmental Store Management System'"></h1>
+    </div>
+<!--    This block is for un-authenticated users-->
+    <div class="row" sec:authorize="!isFullyAuthenticated()">
+        <br>
+        <h1 class="text-center h1 py-2">Welcome to Departmental Store Management System!</h1>
+    </div>
+</div>
+</body>
+</html>
